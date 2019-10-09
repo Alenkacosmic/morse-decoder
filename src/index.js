@@ -38,7 +38,15 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let sentence = [];
+    for (let letter = 0; letter < expr.length; letter += 10) {
+        sentence.push(expr.slice(letter, (letter+10)))
+    }
+
+    sentence = sentence.map(wordLetter => wordLetter.slice(wordLetter.indexOf('1'), 10))
+
+    
+     // write your solution here
 }
 
 module.exports = {
