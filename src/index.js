@@ -40,7 +40,6 @@ const MORSE_TABLE = {
 function decode(expr) {
        
     let sentence = '';
-    let word = '';
 
     for (let char = 0; char + 10 <= expr.length; char += 10) {
         let element = expr.substr(char, 10);
@@ -49,23 +48,25 @@ function decode(expr) {
             sentence += ' ';
 
         } else {
+            let word = '';
 
-            for (let num = 0; num + 2 <= element.length; num += 2) { 
+            for (let num = 0; num +2 <= element.length; num += 2) {
                 let letter = element.substr(num, 2);
 
-                if (letter == '10'){
+                if (letter === '10') {
                     word += '.';
-                } else if (letter == '11'){
+                } else if (letter === '11') {
                     word += '-';
                 }
             }
+            
             sentence += MORSE_TABLE[word];
+
         }
 
     }
 
     return sentence;
-    
      // write your solution here
 }
 
