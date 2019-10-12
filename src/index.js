@@ -38,27 +38,33 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    let sentence = [];
+       
+    let sentence = '';
+    let word = '';
 
-    for (let char = 0; char < expr.length; char +=10) {
-        sentence.push(expr.slice(char, char+=10));
-        
-    }
+    for (let char = 0; char + 10 <= expr.length; char += 10) {
+        let element = expr.substr(char, 10);
 
-    for (let word = 0; word < sentence.length; word++) {
-        
-        if (sentence[word] == '**********') {
-            sentence[word] = ' ';
-            break;
-        } else {   
-            sentence[word] = sentence[word].replace(/'00'/g, '');
-            sentence[word] = sentence[word].replace(/'10'/g, '.');
-            sentence[word] = sentence[word].replace(/'11'/g, '-');
-            sentence[word] = MORSE_TABLE[sentence[word]];
+        if (element.includes('*')){
+            sentence += ' ';
+
+        } else {
+
+            for (let num = 0; num + 2 <= element.length; num += 2) { 
+                let letter = element.substr(num, 2);
+
+                if (letter == '10'){
+                    word += '.';
+                } else if (letter == '11'){
+                    word += '-';
+                }
+            }
+            sentence += MORSE_TABLE[word];
         }
+
     }
 
-    return sentence.join('')
+    return sentence;
     
      // write your solution here
 }
